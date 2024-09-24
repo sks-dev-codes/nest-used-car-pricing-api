@@ -14,7 +14,7 @@ import { Report } from './reports/report.entity';
     password: 'password',
     username: 'root',
     entities: [User, Report],
-    synchronize: true
+    synchronize: true //Do not use in production!!
   }), UsersModule, ReportsModule],
   controllers: [AppController],
   providers: [AppService],
