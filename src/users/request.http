@@ -20,3 +20,11 @@ Get http://localhost:3000/auth?email=test2@email.com
 ### Delete a user with a given id
 
 DELETE http://localhost:3000/auth/1
+
+### Update a user
+PATCH http://localhost:3000/auth/2
+Content-Type: application/json
+
+{
+    "password": "aaa"
+}
