@@ -2,9 +2,18 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email" : "test2@email.com",
-    "password": "test2",
+    "email" : "asdf10@asdf.com",
+    "password": "adfsdfa",
     "admin":"true"
+}
+
+### Sign in a perticular user with a given email and password
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email" : "asdf10@asdf.com",
+    "password": "adfsdfa"
 }
 
 

@@ -2,19 +2,29 @@ import { Body, Controller, Post, Get, Patch, Param, Query, Delete, NotFoundExcep
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
-    constructor(private usersService: UsersService) { }
+    constructor(
+        private usersService: UsersService,
+        private authService: AuthService
+    ) { }
     @Post('/signup')
     createUser(@Body() body: CreateUserDto) {
-        this.usersService.create(body.email, body.password);
+        return this.authService.signup(body.email, body.password);
     }
 
+    @Post('/signin')
+    signin(@Body() body: CreateUserDto) {
+        return this.authService.signin(body.email, body.password);
+    }
+
+    //@UseInterceptors(new SerializeInterceptor(UserDto))
     @Get('/:id')
-    @UseInterceptors(new SerializeInterceptor(UserDto))
     async findUser(@Param('id') id: string) {
         console.log('handller is running');
         const user = await this.usersService.findOne(parseInt(id));
