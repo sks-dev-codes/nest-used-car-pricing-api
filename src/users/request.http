@@ -2,8 +2,8 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email" : "asdf10@asdf.com",
-    "password": "adfsdfa",
+    "email" : "test@test.com",
+    "password": "12345",
     "admin":"true"
 }
 
@@ -12,9 +12,16 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "email" : "asdf10@asdf.com",
-    "password": "adfsdfa"
+    "email" : "test@test.com",
+    "password": "12345"
 }
+
+### Get the currently signed in user
+Get http://localhost:3000/auth/whoami
+
+
+### Signout
+POST http://localhost:3000/auth/signout
 
 
 ### Find a perticular user with a given id
