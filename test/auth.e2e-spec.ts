@@ -4,21 +4,29 @@ import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
 describe('Authentication System', () => {
-  let app: INestApplication;
+    let app: INestApplication;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+    beforeEach(async () => {
+        const moduleFixture: TestingModule = await Test.createTestingModule({
+            imports: [AppModule],
+        }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+        app = moduleFixture.createNestApplication();
+        await app.init();
+    });
 
-  it('handles a signup request', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
+    it('handles a signup request', () => {
+        var r = Math.floor(Math.random() * 999999)
+        var prefix = 'asdlkjq' + r;
+        const email = prefix + '@akl.com';
+        return request(app.getHttpServer())
+            .post('/auth/signup')
+            .send({ email: email, password: 'alskdfjl' })
+            .expect(201)
+            .then((res) => {
+                const { id, email } = res.body;
+                expect(id).toBeDefined();
+                expect(email).toEqual(email)
+            });
+    });
 });
